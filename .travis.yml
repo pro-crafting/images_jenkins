@@ -1,0 +1,15 @@
+language: generic
+sudo: required
+services:
+ - docker
+install: true
+
+before_install:
+- export
+- chmod +x .travis/*.sh
+
+jobs:
+  include:
+    - stage: Build and deploy
+      script:
+        - "./.travis/build-and-deploy.sh"
