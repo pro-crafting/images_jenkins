@@ -17,5 +17,8 @@ RUN apt-get update && \
     apt-get -y install docker-ce docker-ce-cli containerd.io && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# Allow jenkins to use docker
+RUN usermod -a -G docker jenkins
+
 # drop back to the regular jenkins user - good practice
 USER jenkins
