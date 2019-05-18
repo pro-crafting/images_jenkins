@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>com.pro-crafting</groupId>
+        <artifactId>pc-parent</artifactId>
+        <version>2</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.pro-crafting.tools</groupId>
+    <artifactId>images_jenkins</artifactId>
+
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <!-- Settings -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <docker.repository>postremus</docker.repository>
+        <docker.published.port>8080</docker.published.port>
+        <docker.repository>postremus</docker.repository>
+
+        <!-- Plugin Versions -->
+        <version.docker-maven-plugin>0.25.2</version.docker-maven-plugin>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>${docker.repository}/${project.artifactId}</name>
+                            <build>
+                                <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
+                                <tags>
+                                    <tag>latest</tag>
+                                    <tag>${project.version}</tag>
+                                </tags>
+                            </build>
+                        </image>
+                    </images>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>build-phase</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>push-phase</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <!-- Deploy is not really necessary, since we are deploying our only artifact to dockerhub -->
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <configuration>
+                    <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <scm>
+        <connection>scm:git:git@github.com:pro-crafting/images_jenkins.git</connection>
+        <url>https://github.com/pro-crafting/images_jenkins</url>
+        <developerConnection>scm:git:git@github.com:pro-crafting/images_jenkins.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+</project>
