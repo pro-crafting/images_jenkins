@@ -13,7 +13,7 @@ pipeline {
         stage ('Deploy') {
             when {
                 not {
-                    changeRequest
+                    changeRequest()
                 }
             }
             steps {
