@@ -7,8 +7,18 @@ pipeline {
     stages {
         stage ('Build') {
             steps {
+                sh 'mvn clean install'
+            }
+        }
+        stage ('Deploy') {
+            when {
+                not {
+                    changeRequest
+                }
+            }
+            steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'dockerUserName', passwordVariable: 'dockerPassword')]) {
-                  sh 'mvn -Ddocker.username=$dockerUserName -Ddocker.password=$dockerPassword clean deploy'
+                    sh 'mvn -Ddocker.username=$dockerUserName -Ddocker.password=$dockerPassword docker-maven-plugin:push'
                 }
             }
         }
