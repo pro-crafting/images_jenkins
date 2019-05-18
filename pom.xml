@@ -62,7 +62,6 @@
             </plugin>
             <plugin>
                 <!-- Deploy is not really necessary, since we are deploying our only artifact to dockerhub -->
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <configuration>
                     <skip>true</skip>
