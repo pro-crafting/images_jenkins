@@ -51,13 +51,6 @@
                             <goal>build</goal>
                         </goals>
                     </execution>
-                    <execution>
-                        <id>push-phase</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>push</goal>
-                        </goals>
-                    </execution>
                 </executions>
             </plugin>
             <plugin>
