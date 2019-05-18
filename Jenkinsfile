@@ -18,7 +18,7 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'dockerUserName', passwordVariable: 'dockerPassword')]) {
-                    sh 'mvn -Ddocker.username=$dockerUserName -Ddocker.password=$dockerPassword docker-maven-plugin:push'
+                    sh 'mvn -Ddocker.username=$dockerUserName -Ddocker.password=$dockerPassword docker:push'
                 }
             }
         }
