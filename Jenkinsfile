@@ -7,8 +7,8 @@ pipeline {
     stages {
         stage ('Build') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'docker.username', passwordVariable: 'docker.password')]) {
-                  sh 'mvn clean deploy'
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'dockerUserName', passwordVariable: 'dockerPassword')]) {
+                  sh 'mvn -Ddocker.username=$dockerUserName -Ddocker.password=$dockerPassword clean deploy'
                 }
             }
         }
