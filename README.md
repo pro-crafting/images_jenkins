@@ -7,6 +7,7 @@ Specially crafted jenkins images running on jenkins.build.pro-crafting.com
 
 ## Changes include:
 * Installed ansible, so that jenkins can act as an automated playbook runner
+* Installed docker-clie. This allows to build docker images using the host docker
 
 ## Usage:
 Head over to the upstream jenkins docker repository for the [Documentation](https://github.com/jenkinsci/docker/blob/master/README.md)
