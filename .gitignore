@@ -56,3 +56,4 @@ fabric.properties
 
 /images_jenkins.iml
 /.idea/
+/target/docker/
